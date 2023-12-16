@@ -26,8 +26,13 @@ class StringCalculatorTest {
         assertEquals(28, calc.add("1,2,3,4,5,6,7"));
     }
 
+    @Test
+    void multipleDelimitersCheck(){
+        assertEquals(6, calc.add("1,2\n3"));
+    }
+
     @ParameterizedTest
-    @ValueSource(strings = {"string", "1,2e"})
+    @ValueSource(strings = {"string", "1,2e", "1,\n"})
     void testForExceptions(String argument){
         assertThrows(Exception.class, () -> calc.add(argument));
     }
