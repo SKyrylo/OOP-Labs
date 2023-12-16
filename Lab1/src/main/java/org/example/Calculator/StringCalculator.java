@@ -2,14 +2,30 @@ package org.example.Calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
     public int add(String numbers) throws IllegalArgumentException{
         int result = 0;
 
-        if(numbers.startsWith("//") && numbers.charAt(3) == '\n'){
-            char toReplace = numbers.charAt(2);
-            numbers = numbers.substring(4).replace(toReplace, ',');
+        if(numbers.startsWith("//")){
+            if(numbers.charAt(3) == '\n'){
+                char toReplace = numbers.charAt(2);
+                numbers = numbers.substring(4).replace(toReplace, ',');
+            }
+            else{
+                Pattern pattern = Pattern.compile("//\\[([^]]+)]\\n([\\s\\S]*)");
+                Matcher matcher = pattern.matcher(numbers);
+                if(matcher.matches()){
+                    String customDelimiter = numbers.substring(3, numbers.indexOf("]\n"));
+                    numbers = numbers.substring(numbers.indexOf("]\n")+2);
+                    numbers = numbers.replace(customDelimiter, ",");
+                }
+                else{
+                    throw new IllegalArgumentException("Wrong delimiter argument!");
+                }
+            }
         }
 
         numbers = numbers.replace('\n', ',');
