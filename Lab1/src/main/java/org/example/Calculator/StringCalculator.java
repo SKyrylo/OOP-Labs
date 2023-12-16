@@ -4,9 +4,6 @@ public class StringCalculator {
     public int add(String numbers) throws IllegalArgumentException{
         int result = 0;
         String[] arr = numbers.split(",");
-        if(arr.length > 2){
-            throw new IllegalArgumentException("Too much arguments");
-        }
         if(numbers.isEmpty()){
             return 0;
         }
