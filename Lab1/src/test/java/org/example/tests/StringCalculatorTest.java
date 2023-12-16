@@ -31,8 +31,13 @@ class StringCalculatorTest {
         assertEquals(6, calc.add("1,2\n3"));
     }
 
+    @Test
+    void patternCheck(){
+        assertEquals(15, calc.add("//;\n1,2;3,4\n5"));
+    }
+
     @ParameterizedTest
-    @ValueSource(strings = {"string", "1,2e", "1,\n"})
+    @ValueSource(strings = {"string", "1,2e", "1,\n", "/;\n1;2", "//;;\n4;;3", "//;\n4^4"})
     void testForExceptions(String argument){
         assertThrows(Exception.class, () -> calc.add(argument));
     }
