@@ -32,7 +32,9 @@ public class StringCalculator {
                     negative.add(Integer.parseInt(s));
                     error = true;
                 }
-                result += Integer.parseInt(s);
+                if(Integer.parseInt(s) <= 1000){
+                    result += Integer.parseInt(s);
+                }
             }
             catch (NumberFormatException ex) {
                 throw new NumberFormatException("Wrong input type!");
