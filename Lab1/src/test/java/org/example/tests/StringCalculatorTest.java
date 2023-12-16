@@ -35,6 +35,7 @@ class StringCalculatorTest {
     void patternCheck(){
         assertEquals(15, calc.add("//;\n1,2;3,4\n5"));
         assertEquals(6, calc.add("//[***]\n1***2***3"));
+        assertEquals(11, calc.add("//[**][***][*]\n1***2*3**5"));
     }
 
     @ParameterizedTest
